@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Page 2 5x10{% endblock %}
+
+{% block content %}
+ 
+
+<h1>Page 2: What is 5 x 10?</h1>
+
+ <form action={{ url_for("renderPage3") }} method="POST">
+  answer:<br>
+  <input type="text" name="answer">
+    <input type="submit" value="Submit">
+   </form>
+  
+   {% endblock %}
