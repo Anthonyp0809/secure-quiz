@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, url_for, render_template, request
 from flask import redirect
 from flask import session
@@ -18,7 +19,7 @@ def startOver():
     
 @app.route('/page1')
 def renderPage1():
-   
+    session["startTime"]=time.time()
     return render_template('page1.html')
    
     
@@ -38,6 +39,9 @@ def renderPage3():
     
 @app.route('/page4', methods=['GET', 'POST'])
 def renderPage4():
+    session ["endtime"]=time.time()
+    end = (session ["endtime"] - session ["startTime"])
+   
     if not "answer3" in session:
         session["answer3"]=request.form['answer']
     score = 0
@@ -59,6 +63,6 @@ def renderPage4():
     else :
         result5 = "incorrect the correct answer is 500"
     
-    return render_template('page4.html',result1 = result,result2 = result4, result3 = result5, score = score)
+    return render_template('page4.html',result1 = result,result2 = result4, result3 = result5, score = score, time = end )
 if __name__=="__main__":
     app.run(debug=True)
